@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   imports = [
     ./nvim
@@ -8,10 +7,10 @@
   # paths it should manage.
   home.username = "jake";
   home.homeDirectory = "/home/jake";
-  
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+      sha256 = "0799pj8cpzgjw8dlg92n7y718v48sbs59cg6ga8iym7rcry1yhdf";
     }))
   ];
   nixpkgs.config.allowUnfree = true; 
