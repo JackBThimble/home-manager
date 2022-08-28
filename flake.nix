@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of jake";
+  description = "My Home Manager Flake";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -11,19 +11,14 @@
   };
   
   outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations.jake = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+  {
+    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
+    homeConfigurations = {
+      "jake" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs;
         modules = [ ./home.nix ];
-        
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
       };
     };
+  };
 }
